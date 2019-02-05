@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+    <title>User Portal for Waste Bank</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <style>
+        .container1
+        {
+            padding-top: 5%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container1 container">
+        <h2>Waste Bank User Portal (WBUP)</h2>
+        <form id="x" onsubmit="subm()" >
+          <div class="form-group">
+            <label for="uid">UID:</label>
+            <input type="number" class="form-control" id="uid" placeholder="Enter UID" name="uid">
+          </div>
+          <div class="form-group">
+            <label for="amt">Amount:</label>
+            <input type="number" class="form-control" id="amt" placeholder="Enter Amount" name="amt">
+          </div>
+          <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script>
+        // Initialize Firebase
+        var config = {
+        apiKey: "AIzaSyCdpGZWBzBcAOjnBEU3X8EEZI9N8bkaGns",
+        authDomain: "nssproject-cdff3.firebaseapp.com",
+        databaseURL: "https://nssproject-cdff3.firebaseio.com",
+        projectId: "nssproject-cdff3",
+        storageBucket: "nssproject-cdff3.appspot.com",
+        messagingSenderId: "970241223832"
+        };
+        firebase.initializeApp(config);
+        function subm()
+        {
+        var db = firebase.firestore();
+        var u=document.getElementById("uid").value;
+        var a=document.getElementById("amt").value;
+        console.log("maa ka bhosda"+u+a);
+        var data = {
+        uid:u,
+        amt:a
+        };
+        db.collection("data").doc(u).set(data);
+        console.log("maa ka bhosda"+u+a);
+        }
+    </script>
+</body>

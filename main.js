@@ -7,13 +7,11 @@
     messagingSenderId: "970241223832"
     };
     firebase.initializeApp(config);
-    function mid(datax){
-        return datax;
-    }
     function subm()
     {
     var db = firebase.firestore();
     var u=document.getElementById("uid").value;
+    var n=document.getElementById("name").value;
     var a1=document.getElementById("amt1").value;
     var a2=document.getElementById("amt2").value;
     var a3=document.getElementById("amt3").value;
@@ -23,7 +21,6 @@
         alert("Please provide data.");
     else
     {
-        var dat;
         var docRef = db.collection("data").doc(u);
         var t=docRef.get().then(function(doc) {
         if (doc.exists) {
@@ -36,6 +33,10 @@
     function updater(dat){
         if(dat.exist)
     {
+    if(n!=dat.name){
+        alert("Name mismatch.");
+        return;
+    }
     a1=Number(a1)+Number(dat.amt1);
     a2=Number(a2)+Number(dat.amt2);
     a3=Number(a3)+Number(dat.amt3);
@@ -46,6 +47,7 @@
     amt2:a2,
     amt3:a3,
     amt4:a4,
+    name:n,
     exist:true
     };
     db.collection("data").doc(u).set(data);
@@ -60,6 +62,7 @@
     amt2:a2,
     amt3:a3,
     amt4:a4,
+    name:n,
     exist:true
     };
     db.collection("data").doc(u).set(data);

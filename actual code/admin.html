@@ -14,11 +14,15 @@
 <body style="background:#212529">
     <div class="container container1" style="background:#212529;color:azure">
     <div class="form-group">
+        <label for="pass">PASSWORD for Portal:</label>
+        <input type="password" autocomplete="off" autofocus class="form-control" id="pass" placeholder="Enter Password" name="pass">
+    </div>
+    <div class="form-group">
         <label for="uid">UID:</label>
         <input type="text" class="form-control" id="uid" placeholder="Enter UID" name="uid">
     </div>
-    <button class="btn btn-primary" onclick="particular()">Show Above</button>
-    <button class="btn btn-info" onclick="alldata()">Show All</button>
+    <button class="btn btn-primary" onclick="verifypass('specific')">Show Above</button>
+    <button class="btn btn-info" onclick="verifypass('all')">Show All</button>
     <button class="btn btn-success" onclick="convtocsv()">Get CSV</div></button>
     <br><br>
     <table class="table table-dark" id="infoall"><tr>

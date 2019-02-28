@@ -9,6 +9,23 @@ var config = {
     };
     firebase.initializeApp(config);
     db = firebase.firestore();
+    function verifypass(redir){
+        var pass=document.getElementById("pass").value;
+        db.collection("admin").doc("pass").get().then(function(doc){
+            var xpass=doc.data().password;
+            if(xpass != pass){
+                window.alert("Wrong Password");
+            }
+            else{
+            if(redir=="specific"){
+                particular();
+            }
+            else if(redir == 'all'){
+                alldata();
+            }
+            }
+        });        
+    }
     function alldata(){
     var totamt1=0;
     var totamt2=0;
@@ -115,14 +132,12 @@ function particular(){
 }}
 
 function convtocsv(){
-        console.log(datx.docs);
         var datajson=[{}];
         var d;
         datx.forEach(function(doc){
             d=doc.data();
             datajson.push(d);
         })
-        console.log(datajson);
         JSONToCSVConvertor(datajson,"Current User Data",true);
     }
 

@@ -13,7 +13,7 @@ var config = {
         var pass=document.getElementById("pass").value;
         db.collection("admin").doc("pass").get().then(function(doc){
             var xpass=doc.data().password;
-            if(!xpass.actprj){
+            if(!doc.data().actprj){
                 window.alert("project de-activated");
                 return;
             }

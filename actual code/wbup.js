@@ -11,12 +11,15 @@
     {
     var db = firebase.firestore();
     var u=document.getElementById("uid").value;
+    if(u.length!=10){
+        window.alert("Invalid User-Id");
+    }
+    else{
     var n=document.getElementById("name").value;
     var a1=document.getElementById("amt1").value;
     var a2=document.getElementById("amt2").value;
     var a3=document.getElementById("amt3").value;
     var a4=document.getElementById("amt4").value;
-    // var w=document.getElementById("wastetype").value;
     if(u=="" || a1=="" || a2=="" || a3=="" || a4=="")
         alert("Please provide data.");
     else
@@ -48,6 +51,7 @@
     amt3:a3,
     amt4:a4,
     name:n,
+    timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
     exist:true
     };
     db.collection("data").doc(u).set(data);
@@ -63,6 +67,7 @@
     amt3:a3,
     amt4:a4,
     name:n,
+    timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
     exist:true
     };
     db.collection("data").doc(u).set(data);
@@ -70,3 +75,4 @@
     }
     }
     }
+}

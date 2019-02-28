@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <title>Admin Portal for Waste Bank</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script src="./admin.js"></script>
+</head>
+<body style="background:#212529">
+    <div class="container container1" style="background:#212529;color:azure">
+    <div class="form-group">
+        <label for="uid">UID:</label>
+        <input type="text" class="form-control" id="uid" placeholder="Enter UID" name="uid">
+    </div>
+    <button class="btn btn-primary" onclick="particular()">Show Above</button>
+    <button class="btn btn-info" onclick="alldata()">Show All</button>
+    <button class="btn btn-success" onclick="convtocsv()">Get CSV</div></button>
+    <br><br>
+    <table class="table table-dark" id="infoall"><tr>
+        <th>Name</th>
+        <th>UID</th>
+        <th>Amt1</th>
+        <th>Amt2</th>
+        <th>Amt3</th>
+        <th>Amt4</th>
+    </tr></table>
+    <div class="table" id="infopart"></div></div>
+</body>

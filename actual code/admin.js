@@ -1,3 +1,4 @@
+var datx,db;
 var config = {
     apiKey: "AIzaSyCdpGZWBzBcAOjnBEU3X8EEZI9N8bkaGns",
     authDomain: "nssproject-cdff3.firebaseapp.com",
@@ -7,15 +8,16 @@ var config = {
     messagingSenderId: "970241223832"
     };
     firebase.initializeApp(config);
-    var db = firebase.firestore();
+    db = firebase.firestore();
     function alldata(){
     var totamt1=0;
     var totamt2=0;
     var totamt3=0;
     var totamt4=0;
-    db.collection("data").where("exist", "==", true)
+    db.collection("data").where("exist", "==", true).orderBy('timeStamp')
     .get()
     .then(function(querySnapshot) {
+        datx=querySnapshot;
         querySnapshot.forEach(function(doc) {
         var dat=doc.data();
         totamt1+=Number(dat.amt1);
@@ -68,6 +70,10 @@ var config = {
 }
 function particular(){
     var u=document.getElementById("uid").value;
+    if(u==''){
+        window.alert("Please Enter the UID");
+    }
+    else{
     var docRef = db.collection("data").doc(u);
     var t=docRef.get().then(function(doc) {
     if (doc.exists) {
@@ -106,4 +112,51 @@ function particular(){
     document.getElementById("infopart").appendChild(node);        
     }}).catch(function(error) {
     console.log("Error getting document:", error);})
+}}
+
+function convtocsv(){
+        console.log(datx.docs);
+        var datajson=[{}];
+        var d;
+        datx.forEach(function(doc){
+            d=doc.data();
+            datajson.push(d);
+        })
+        console.log(datajson);
+        JSONToCSVConvertor(datajson,"Current User Data",true);
+    }
+
+function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
+    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;    
+    var CSV = 'sep=,' + '\r\n';
+    if (ShowLabel) {
+        var row = "";
+        for (var index in arrData[1]) {
+            row += index + ',';
+        }
+        row = row.slice(0, -1);
+        CSV += row + '\r\n';
+    }
+    for (var i = 0; i < arrData.length; i++) {
+        var row = "";
+        for (var index in arrData[i]) {
+            row += '"' + arrData[i][index] + '",';
+        }
+        row.slice(0, row.length - 1);
+        CSV += row + '\r\n';
+    }
+    if (CSV == '') {        
+        alert("Invalid data");
+        return;
+    }
+    var fileName = "";
+    fileName += ReportTitle.replace(/ /g,"_");
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+    var link = document.createElement("a");    
+    link.href = uri;
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }

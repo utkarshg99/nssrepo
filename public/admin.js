@@ -13,6 +13,10 @@ var config = {
         var pass=document.getElementById("pass").value;
         db.collection("admin").doc("pass").get().then(function(doc){
             var xpass=doc.data().password;
+            if(!xpass.actprj){
+                window.alert("project de-activated");
+                return;
+            }
             if(xpass != pass){
                 window.alert("Wrong Password");
             }

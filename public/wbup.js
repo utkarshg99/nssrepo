@@ -20,8 +20,16 @@
     var a2=document.getElementById("amt2").value;
     var a3=document.getElementById("amt3").value;
     var a4=document.getElementById("amt4").value;
-    if(u=="" || a1=="" || a2=="" || a3=="" || a4=="")
-        alert("Please provide data.");
+    if(u=="" || n=="")
+        alert("Please provide Name and UID both.");
+    if(a1= "")
+        a1=0;
+    if(a2="")
+        a2=0;
+    if(a3="")
+        a3=0;
+    if(a4="")
+        a4=0;
     else
     {
         var docRef = db.collection("data").doc(u);
